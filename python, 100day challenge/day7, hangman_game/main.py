@@ -1,5 +1,5 @@
 import random
-from replit import clear
+# from replit import clear
 import hangman_art, hangman_word
 
 print(hangman_art.logo)
@@ -20,7 +20,7 @@ while not end_of_game:
     guess = input("Guess a letter:\n").lower()
 
     # 리플잇에서 지원하는 커맨드 초기화 명령어
-    clear()
+    # clear()
     
     print("---------------------------")
     
