@@ -29,8 +29,7 @@ def naver_blog_finder():
         except:
             break
 
-    print(f"{search_word}의 블로그 글이 끝났습니다.")
+    print(f"네이버의 {search_word}관련 블로그 글이 끝났습니다.")
     print(f"전체 글 수는 {count}입니다")
 
 naver_blog_finder()
-
