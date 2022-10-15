@@ -2,7 +2,13 @@
 1. selenium 설치하기(pip install selenium)
   - driver를 관리하는 패키지 설치하기(pip install webdriver-manager)
 2. TODO. import에 있는 모듈 임포트
-3.
+3. driver 설정(자동 install)
+4. 페이지 오픈(get)
+5. 로그인
+  - 모달창 처리
+6. 원하는 태그 위치로 이동(get)
+7. 첫번째 게시물 클릭
+8. 사진 다운로드 및 다음 페이지로 이동
 
 문제해결
 주요 문제들은 샐레니움이 4버전이 업데이트 되면서 생긴 문제들이다.(selenium버전: 4.5.0)
@@ -40,6 +46,8 @@ driver.get("https://www.instagram.com/")
 # el = driver.find_element(By.CSS_SELECTOR, ".b_nGN").text
 
 ## TODO. 인풋데이터에 정보 집어넣기(로그인 자동화)
+# 참고로 나는 인스타그램을 페이스북 연동으로 해뒀기 떄문에 이 코드는 의미가 없음
+
 driver.implicitly_wait(10)
 # el = driver.find_element(By.CSS_SELECTOR, "input[name='username']")
 # el.send_keys("아이디")
@@ -51,11 +59,15 @@ driver.implicitly_wait(10)
 # el = driver.find_element(By.CSS_SELECTOR, "button.y3zKF").click()
 driver.find_element(By.XPATH, '//*[@id="loginForm"]/div/div[5]/button').click()
 
+## TODO 본인의 ID와 PW 넣기
+my_id = "아이디"
+my_pw = "비밀번호"
+
 user_id = driver.find_element(By.XPATH, '//*[@id="email"]')
-user_id.send_keys("01088035510")
+user_id.send_keys(my_id)
 user_password = driver.find_element(By.XPATH, '//*[@id="pass"]')
 user_password.click()
-user_password.send_keys("@jaja2578")
+user_password.send_keys(my_pw)
 user_password.send_keys(Keys.ENTER)
 
 ## 모달창 처리하는 코드
@@ -80,8 +92,4 @@ for i in range(10):
     # # 만약 버튼이 안눌린다면?(JS 문법임)
     next_image = driver.find_element(By.CSS_SELECTOR, 'div._aaqg._aaqh button._abl-')
     driver.execute_script('arguments[0].click();', next_image)
-
-    # 윤태 요즘 새로 배우는거에요!!!!
-    # 하나는 네이버에서 자동으로 검색 해주는 프로그램
-    # 하나는 인스타그램에서 사진 자동으로 받아주는 프로그램!!!
 
