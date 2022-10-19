@@ -14,6 +14,9 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+
+import pyperclip
 
 
 options = webdriver.ChromeOptions()
@@ -25,8 +28,10 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), opti
 driver.get("https://nid.naver.com/nidlogin.login?svctype=262144&url=http://m.naver.com/aside/")
 
 driver.implicitly_wait(10)
+
+pyperclip.copy("id")
 el = driver.find_element(By.CSS_SELECTOR, "input#id")
-el.send_keys("id")
+el.send_keys(Keys.CONTROL, 'v')
 el = driver.find_element(By.CSS_SELECTOR, "input#pw")
 el.send_keys("jajaja")
 
