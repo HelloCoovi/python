@@ -11,11 +11,13 @@
 """
 
 from selenium import webdriver
+from selenium.webdriver import ActionChains
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
+import time
 import pyperclip
 
 
@@ -27,12 +29,32 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), opti
 # driver.get("https://m.naver.com/")
 driver.get("https://nid.naver.com/nidlogin.login?svctype=262144&url=http://m.naver.com/aside/")
 
-driver.implicitly_wait(10)
+user_id = "your ID"
+user_pw = "your PW"
 
-pyperclip.copy("id")
-el = driver.find_element(By.CSS_SELECTOR, "input#id")
-el.send_keys(Keys.CONTROL, 'v')
-el = driver.find_element(By.CSS_SELECTOR, "input#pw")
-el.send_keys("jajaja")
+time.sleep(2)
+
+el = driver.find_element(By.ID, "id")
+pyperclip.copy(user_id)
+el.click()
+## TODO. 코드 복사 붙여넣기에 관하여
+# 이상하게 코드가 오락가락한다.
+# 첫번째 코드: el.send_keys(Keys.COMMAND, 'v')
+#   심플하게 command + v 인데 종종 작동을 안한다. 공식문서와 자료를 참고해 수정한 코드는 다음으로
+# 두번째 코드: ActionChains(driver).key_down(Keys.COMMAND).send_keys('v').key_up(Keys.COMMAND).perform()
+#   좀 더 복잡하고 섬세한작업에 쓰인다고 공식문서에 기록되어있다.
+#   from selenium.webdriver import ActionChains 와 같은 임포트 과정이 필요하며 첫번쨰 보다는 이 방법을 추천한다.
+ActionChains(driver).key_down(Keys.COMMAND).send_keys('v').key_up(Keys.COMMAND).perform()
+time.sleep(1)
+
+el = driver.find_element(By.ID, "pw")
+pyperclip.copy(user_pw)
+el.click()
+ActionChains(driver).key_down(Keys.COMMAND).send_keys('v').key_up(Keys.COMMAND).perform()
+time.sleep(1)
+
+el.send_keys(Keys.ENTER)
+
+
 
 
