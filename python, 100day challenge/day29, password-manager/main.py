@@ -42,7 +42,7 @@ def generate_password():
     pyperclip.copy(password)
 
 
-# ---------------------------- SAVE PASSWORD ------------------------------- #
+# ---------------------------- FIND PASSWORD ------------------------------- #
 def find_password():
     site = site_entry.get()
     try:
@@ -60,7 +60,7 @@ def find_password():
             messagebox.showinfo(title="User_info", message=f"Email: {found_email}\nPassword: {found_password}")
 
 
-
+# ---------------------------- SAVE PASSWORD ------------------------------- #
 def save_info():
     site = site_entry.get()
     email = email_entry.get()
