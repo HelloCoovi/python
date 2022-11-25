@@ -15,6 +15,7 @@ with open("./input/Names/invited_names.txt", "r") as name_file:
     for i in range(len(names)):
         names[i] = names[i].strip()
 
+
 for name in names:
     file = open(f"./Output/ReadyToSend/letter_for_{name}.txt", "w")
     text = base_letter.replace("[name]", name)
